@@ -20,12 +20,12 @@ import com.ctre.CANTalon;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public static final Joystick stick = new Joystick(1);
-	Button button = new JoystickButton(stick, 6);
+	public static final Joystick stick = new Joystick(0);
+	Button button = new JoystickButton(stick, 1);
 	
 	public OI() {
-//		button.whenPressed(new ExampleCommand());
-//		button.whileHeld(new ExampleCommand());
-//		button.whenReleased(new ExampleCommand());
+		//button.whenPressed(new intakeCommand());
+		button.whileHeld(new intakeCommand());
+		//button.whenReleased(new intakeCommand());
 	}
 }

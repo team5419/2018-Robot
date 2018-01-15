@@ -1,23 +1,30 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package org.usfirst.frc.team5419.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team5419.robot.RobotMap;
 
-/**
- * An example subsystem.  You can replace me with your own Subsystem.
- */
-public class ExampleSubsystem extends Subsystem {
+import org.usfirst.frc.team5419.robot.commands.DriveCommand;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
+public class Intake extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
+	WPI_TalonSRX intake = new WPI_TalonSRX(RobotMap.intake);	
+	WPI_TalonSRX intakeReversed = new WPI_TalonSRX(RobotMap.intakeReversed);
+	
+	public void run() {
+		intake.set(1);
+		intakeReversed.set(-1);
+	}
+	public void stop() {
+		intake.set(0);
+		intakeReversed.set(0);	}
 
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new DriveCommand());
 	}
 }

@@ -1,7 +1,8 @@
 package org.usfirst.frc.team5419.robot.subsystems;
 
 import org.usfirst.frc.team5419.robot.RobotMap;
-import org.usfirst.frc.team5419.robot.commands.ExampleCommand;
+
+import org.usfirst.frc.team5419.robot.commands.DriveCommand;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Joystick;
@@ -22,13 +23,13 @@ public class DriveTrain extends Subsystem {
 	DifferentialDrive drive = new DifferentialDrive(left, right);
 	
 	public void joystickInput(Joystick stick) {
-		drive.arcadeDrive(stick.getRawAxis(1), stick.getRawAxis(3));
+		drive.arcadeDrive(stick.getRawAxis(1), stick.getRawAxis(2));
 	}
 	public void stop() {
 		drive.arcadeDrive(0, 0);
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new ExampleCommand());
+		setDefaultCommand(new DriveCommand());
 	}
 }

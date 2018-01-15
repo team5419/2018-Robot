@@ -8,13 +8,16 @@
 package org.usfirst.frc.team5419.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team5419.robot.commands.ExampleCommand;
+
+import org.usfirst.frc.team5419.robot.commands.DriveCommand;
+import org.usfirst.frc.team5419.robot.commands.intakeCommand;
 import org.usfirst.frc.team5419.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5419.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team5419.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,8 +27,8 @@ import org.usfirst.frc.team5419.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final ExampleSubsystem kExampleSubsystem
-			= new ExampleSubsystem();
+	public static final Intake intake
+			= new Intake();
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static OI oi;
 
@@ -39,7 +42,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		m_chooser.addDefault("Default Auto", new ExampleCommand());
+		m_chooser.addDefault("Default Auto", new DriveCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}

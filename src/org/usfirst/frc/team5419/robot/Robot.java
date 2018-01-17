@@ -27,9 +27,8 @@ import org.usfirst.frc.team5419.robot.subsystems.Intake;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final Intake intake
-			= new Intake();
-	public static final DriveTrain driveTrain = new DriveTrain();
+	public static Intake intake;
+	public static DriveTrain driveTrain;
 	public static OI oi;
 
 	Command m_autonomousCommand;
@@ -41,6 +40,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		intake = new Intake();
+		driveTrain = new DriveTrain();
 		oi = new OI();
 		m_chooser.addDefault("Default Auto", new DriveCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());

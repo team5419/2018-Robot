@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5419.robot.subsystems;
 
+import org.usfirst.frc.team5419.robot.OI;
 import org.usfirst.frc.team5419.robot.RobotMap;
 
 import org.usfirst.frc.team5419.robot.commands.DriveCommand;
@@ -22,8 +23,8 @@ public class DriveTrain extends Subsystem {
 	SpeedControllerGroup right = new SpeedControllerGroup(rightFrontMotor, rightBackMotor);
 	DifferentialDrive drive = new DifferentialDrive(left, right);
 	
-	public void joystickInput(Joystick stick) {
-		drive.arcadeDrive(stick.getRawAxis(1), stick.getRawAxis(2));
+	public void drive() {
+		drive.arcadeDrive(OI.stick.getRawAxis(1), OI.stick.getRawAxis(2));
 	}
 	public void stop() {
 		drive.arcadeDrive(0, 0);

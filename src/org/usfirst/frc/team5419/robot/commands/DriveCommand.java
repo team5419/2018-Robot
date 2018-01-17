@@ -16,7 +16,7 @@ import org.usfirst.frc.team5419.robot.Robot;
 public class DriveCommand extends Command {
 	public DriveCommand() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.intake);
+		//requires(Robot.intake);
 		requires(Robot.driveTrain);
 	}
 
@@ -28,7 +28,7 @@ public class DriveCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.driveTrain.joystickInput(Robot.oi.stick);
+		Robot.driveTrain.drive();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

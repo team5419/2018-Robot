@@ -13,6 +13,7 @@ import org.usfirst.frc.team5419.robot.Robot;
 public class intakeCommand extends Command {
 	public intakeCommand() {
 		requires(Robot.intake);
+		//requires(Robot.driveTrain);
 	}
 
 	@Override

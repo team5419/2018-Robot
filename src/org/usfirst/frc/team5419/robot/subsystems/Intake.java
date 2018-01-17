@@ -3,6 +3,7 @@ package org.usfirst.frc.team5419.robot.subsystems;
 import org.usfirst.frc.team5419.robot.RobotMap;
 
 import org.usfirst.frc.team5419.robot.commands.DriveCommand;
+import org.usfirst.frc.team5419.robot.commands.intakeCommand;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Joystick;
@@ -22,9 +23,10 @@ public class Intake extends Subsystem {
 	}
 	public void stop() {
 		intake.set(0);
-		intakeReversed.set(0);	}
+		intakeReversed.set(0);	
+	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new DriveCommand());
+		//setDefaultCommand(new DriveCommand());
 	}
 }

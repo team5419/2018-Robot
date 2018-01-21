@@ -21,11 +21,14 @@ import com.ctre.CANTalon;
  */
 public class OI {
 	public static final Joystick stick = new Joystick(0);
-	Button button = new JoystickButton(stick, 1);
+	Button intakeButton = new JoystickButton(stick, 1);
+	Button outtakeButton = new JoystickButton(stick, 2);
+	
 	
 	public OI() {
 		//button.whenPressed(new intakeCommand());
-		button.whileHeld(new intakeCommand());
+		intakeButton.whileHeld(new intakeCommand(0));
+		outtakeButton.whileHeld(new intakeCommand(1));
 		//button.whenReleased(new intakeCommand());
 	}
 }

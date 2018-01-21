@@ -18,7 +18,7 @@ public class RobotMap {
 	 public static int rightBackMotor = 2;
 	 public static int leftFrontMotor = 10;
 	 public static int rightFrontMotor = 1;
-	 public static int intake = 8;
-	 public static int intakeReversed = 7;
+	 public static int intake = 7;
+	 public static int intakeReversed = 8;
 
 }

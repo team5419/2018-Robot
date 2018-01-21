@@ -11,9 +11,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5419.robot.Robot;
 
 public class intakeCommand extends Command {
-	public intakeCommand() {
+	int whichWay;
+
+	// 0 for intake
+	// 1 for outtake
+	public intakeCommand(int whichWay) {
 		requires(Robot.intake);
-		//requires(Robot.driveTrain);
+		this.whichWay = whichWay;
 	}
 
 	@Override
@@ -22,7 +26,7 @@ public class intakeCommand extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.intake.run();
+		Robot.intake.run(whichWay);
 	}
 
 	@Override

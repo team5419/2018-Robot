@@ -14,19 +14,25 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class Intake extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	WPI_TalonSRX intake = new WPI_TalonSRX(RobotMap.intake);	
+	WPI_TalonSRX intake = new WPI_TalonSRX(RobotMap.intake);
 	WPI_TalonSRX intakeReversed = new WPI_TalonSRX(RobotMap.intakeReversed);
-	
-	public void run() {
-		intake.set(1);
-		intakeReversed.set(-1);
+
+	public void run(int a) {
+		if (a == 0) {
+			intake.set(0.5);
+			intakeReversed.set(-0.5);
+		} else {
+			intake.set(-0.5);
+			intakeReversed.set(0.5);
+		}
 	}
+
 	public void stop() {
 		intake.set(0);
-		intakeReversed.set(0);	
+		intakeReversed.set(0);
 	}
 
 	public void initDefaultCommand() {
-		//setDefaultCommand(new DriveCommand());
+		// setDefaultCommand(new DriveCommand());
 	}
 }

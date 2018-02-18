@@ -16,9 +16,12 @@ package org.usfirst.frc.team5419.robot;
 public class RobotMap {
 	 public static int leftBackMotor = 9;
 	 public static int rightBackMotor = 2;
-	 public static int leftFrontMotor = 10;
-	 public static int rightFrontMotor = 1;
-	 public static int intake = 7;
-	 public static int intakeReversed = 8;
+	 public static int leftFrontMotor = 0;
+	 public static int rightFrontMotor = 10;
+	 //When looking at robot from front
+	 public static int intakeLeft = 1;
+	 public static int intakeRight = 3;
+	 public static int intakeArm = 6;
+	 public static final double CIRCUMFERENCE = 5.0*Math.PI;
 
 }

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5419.robot.subsystems;
 
+import org.usfirst.frc.team5419.robot.OI;
 import org.usfirst.frc.team5419.robot.RobotMap;
 
 import org.usfirst.frc.team5419.robot.commands.DriveCommand;
@@ -14,15 +15,16 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class Intake extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	WPI_TalonSRX intake = new WPI_TalonSRX(RobotMap.intake);
-	WPI_TalonSRX intakeReversed = new WPI_TalonSRX(RobotMap.intakeReversed);
+	WPI_TalonSRX intake = new WPI_TalonSRX(RobotMap.intakeLeft);
+	WPI_TalonSRX intakeReversed = new WPI_TalonSRX(RobotMap.intakeRight);
+	
 
-	public void run(int a) {
-		if (a == 0) {
+	public void run(int direction) {
+		if (direction == 0) {
 			intake.set(0.5);
 			intakeReversed.set(-0.5);
 		} else {
-			intake.set(-0.5);
+			intake.set(-0.25);
 			intakeReversed.set(0.5);
 		}
 	}

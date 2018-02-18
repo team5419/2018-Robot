@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team5419.robot;
 
+import edu.wpi.first.wpilibj.DriverStation; 
 import edu.wpi.first.wpilibj.TimedRobot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,10 +15,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team5419.robot.commands.DriveCommand;
-import org.usfirst.frc.team5419.robot.commands.intakeCommand;
-import org.usfirst.frc.team5419.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5419.robot.subsystems.Intake;
+import org.usfirst.frc.team5419.robot.commands.*;
+import org.usfirst.frc.team5419.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,10 +28,11 @@ import org.usfirst.frc.team5419.robot.subsystems.Intake;
 public class Robot extends TimedRobot {
 	public static Intake intake;
 	public static DriveTrain driveTrain;
+	public static intakeArm intakeArm;
 	public static OI oi;
 
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	Command autoCommand;
+	SendableChooser<Command> chooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -42,10 +42,15 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		intake = new Intake();
 		driveTrain = new DriveTrain();
+		intakeArm = new intakeArm();
 		oi = new OI();
-		m_chooser.addDefault("Default Auto", new DriveCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
+		chooser = new SendableChooser<Command>();
+		//Here I want to add the drive straight to solely cross the baseline command
+		//and the command to figure out switch color position and drop a crate in it
+		//auto line is 10ft from wall
+		chooser.addDefault("Cross Base", new autoDriveCommand(120));
+		chooser.addObject("Put Block", new autoPutCommand());
+		SmartDashboard.putData("Auto mode", chooser);
 	}
 
 	/**
@@ -76,18 +81,11 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
+		autoCommand = chooser.getSelected();
+		System.err.println(autoCommand);
 		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
+		if (autoCommand != null) {
+			autoCommand.start();
 		}
 	}
 
@@ -105,8 +103,8 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
+		if (autoCommand != null) {
+			autoCommand.cancel();
 		}
 	}
 

@@ -16,9 +16,10 @@ public class intakeArm extends Subsystem {
 	// here. Call these from Commands.
 	WPI_TalonSRX intakeArm = new WPI_TalonSRX(RobotMap.intakeArm);
 	
+	
 
 	public void run() {
-		intakeArm.set(OI.operatorStick.getRawAxis(1));
+		intakeArm.set(OI.operatorStick.getRawAxis(1) * 0.5);
 	}
 
 	public void stop() {

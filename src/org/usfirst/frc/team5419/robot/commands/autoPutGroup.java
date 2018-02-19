@@ -9,30 +9,37 @@ import org.usfirst.frc.team5419.robot.Robot;
  * An example command.  You can replace me with your own command.
  */
 public class autoPutGroup extends CommandGroup {
+	public autoMap autoMap;
 	String gameData;
 
 	public autoPutGroup() {
+		
+		//Starting with left of robot on center line
+		//Adjust for 17 inches to right
+		autoMap = new autoMap();
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		if(gameData.charAt(0) == 'L')
 		{
-			addSequential(new autoDriveCommand(24));
-			addSequential(new autoTurnCommand(45, -1));
-			addSequential(new autoDriveCommand(70));
-			addSequential(new autoTurnCommand(45, 1));
-			addSequential(new autoDriveCommand(25));
-			addSequential(new outtakeAutoCommand());
-
 			System.err.println("left");
-		} else {
-			addSequential(new autoDriveCommand(24));
-			addSequential(new autoTurnCommand(45, 1));
-			addSequential(new autoDriveCommand(70));
+
+			addSequential(new autoDriveCommand(autoMap.left_autoDrive_distance_1));
 			addSequential(new autoTurnCommand(45, -1));
-			addSequential(new autoDriveCommand(25));
-			addSequential(new outtakeAutoCommand());
-			
+			addSequential(new autoDriveCommand(autoMap.left_autoDrive_distance_2));
+			addSequential(new autoTurnCommand(45, 1));
+			addSequential(new autoDriveCommand(autoMap.left_autoDrive_distance_3));
+			addSequential(new outtakeAutoCommand(autoMap.outtake_time));
+
+		} else {
 			
 			System.err.println("right");
+			addSequential(new autoDriveCommand(autoMap.right_autoDrive_distance_1));
+			addSequential(new autoTurnCommand(45, 1));
+			addSequential(new autoDriveCommand(autoMap.right_autoDrive_distance_2));
+			addSequential(new autoTurnCommand(45, -1));
+			addSequential(new autoDriveCommand(autoMap.right_autoDrive_distance_3));
+			addSequential(new outtakeAutoCommand(autoMap.outtake_time));
+			
+			
 		}
 	}
 	

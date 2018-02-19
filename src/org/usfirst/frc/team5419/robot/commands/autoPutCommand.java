@@ -20,6 +20,7 @@ public class autoPutCommand extends Command {
 	public autoPutCommand() {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.intake);
+		requires(Robot.intakeArm);
 		requires(Robot.driveTrain);
 	}
 
@@ -35,6 +36,7 @@ public class autoPutCommand extends Command {
 	protected void execute() {
 		if(gameData.charAt(0) == 'L')
 		{
+			
 			System.err.println("left");
 		} else {
 			System.err.println("right");

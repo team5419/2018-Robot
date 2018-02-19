@@ -4,6 +4,7 @@ import org.usfirst.frc.team5419.robot.OI;
 import org.usfirst.frc.team5419.robot.RobotMap;
 
 import org.usfirst.frc.team5419.robot.commands.DriveCommand;
+import org.usfirst.frc.team5419.robot.commands.intakeArmCommand;
 import org.usfirst.frc.team5419.robot.commands.intakeCommand;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -16,12 +17,8 @@ public class intakeArm extends Subsystem {
 	WPI_TalonSRX intakeArm = new WPI_TalonSRX(RobotMap.intakeArm);
 	
 
-	public void run(int direction) {
-		if (direction == 0) {
-			intakeArm.set(0.25);
-		} else {
-			intakeArm.set(-0.25);
-		}
+	public void run() {
+		intakeArm.set(OI.operatorStick.getRawAxis(1));
 	}
 
 	public void stop() {
@@ -29,6 +26,6 @@ public class intakeArm extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		// setDefaultCommand(new DriveCommand());
+		setDefaultCommand(new intakeArmCommand());
 	}
 }

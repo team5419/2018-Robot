@@ -7,8 +7,10 @@
 
 package org.usfirst.frc.team5419.robot;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -21,19 +23,17 @@ import com.ctre.CANTalon;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public static final Joystick stick = new Joystick(0);
-	Button intakeButton = new JoystickButton(stick, 1);
-	Button outtakeButton = new JoystickButton(stick, 2);
-	Button upArmButton = new JoystickButton(stick, 5);
-	Button downArmButton = new JoystickButton(stick, 6);
-	public static final Encoder encoderLeft = new Encoder(1,2,false,Encoder.EncodingType.k2X);
-	public static final Encoder encoderRight = new Encoder(3,4,false,Encoder.EncodingType.k2X);
+	public static final Joystick driverStick = new Joystick(0);
+	public static final Joystick operatorStick = new Joystick(1);
+	Button intakeButton = new JoystickButton(operatorStick, 2);
+	Button outtakeButton = new JoystickButton(operatorStick, 3);
+	public static final Encoder encoderLeft = new Encoder(2,3,false,Encoder.EncodingType.k2X);
+	public static final Encoder encoderRight = new Encoder(4,5,false,Encoder.EncodingType.k2X);
+	public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 	
 	
 	public OI() {
 		intakeButton.whileHeld(new intakeCommand(0));
 		outtakeButton.whileHeld(new intakeCommand(1));
-		downArmButton.whileHeld(new intakeArmCommand(0));
-		upArmButton.whileHeld(new intakeArmCommand(1));
 	}
 }

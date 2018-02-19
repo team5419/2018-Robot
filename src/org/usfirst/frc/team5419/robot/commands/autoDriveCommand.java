@@ -20,24 +20,30 @@ public class autoDriveCommand extends Command {
 	int distance;
 	public autoDriveCommand(int distance) {
 		requires(Robot.driveTrain);
+		this.distance = distance;
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		OI.encoderLeft.reset();
+		OI.encoderRight.reset();
+		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.driveTrain.drive();
+		Robot.driveTrain.driveForward();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		double encoderavg = (OI.encoderLeft.get() - OI.encoderRight.get())/2.0;
-		double distanceavg = encoderavg * RobotMap.CIRCUMFERENCE / 360;
+		System.out.println(OI.encoderLeft.get() + " "+ OI.encoderRight.getRaw());
+		double encoderavg = (Math.abs(OI.encoderLeft.getRaw()) + Math.abs(OI.encoderRight.getRaw()))/2.0;
+		double distanceavg = encoderavg * RobotMap.CIRCUMFERENCE / 720;
+		System.out.println(distanceavg + " " + distance);
 		if(distanceavg > distance) {
 			return true;
 		}

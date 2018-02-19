@@ -40,6 +40,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		OI.gyro.calibrate();
+		OI.gyro.reset();
 		intake = new Intake();
 		driveTrain = new DriveTrain();
 		intakeArm = new intakeArm();
@@ -51,6 +53,7 @@ public class Robot extends TimedRobot {
 		chooser.addDefault("Cross Base", new autoDriveCommand(120));
 		chooser.addObject("Put Block", new autoPutCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		
 	}
 
 	/**
@@ -114,6 +117,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("EncoderLeft", OI.encoderLeft.getRaw());
+		SmartDashboard.putNumber("EncoderRight", OI.encoderRight.getRaw());
+
 	}
 
 	/**

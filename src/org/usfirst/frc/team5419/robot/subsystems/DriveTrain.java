@@ -24,8 +24,22 @@ public class DriveTrain extends Subsystem {
 	DifferentialDrive drive = new DifferentialDrive(left, right);
 	
 	public void drive() {
-		drive.arcadeDrive(-OI.stick.getRawAxis(1), OI.stick.getRawAxis(4));
+		drive.arcadeDrive(-OI.driverStick.getRawAxis(1)*3/4, OI.driverStick.getRawAxis(4)*3/4);
+//		System.err.println("Left Encoder: "+ OI.encoderLeft.getDistance());
+//		System.err.println("Right Encoder: "+ OI.encoderRight.getDistance());
+
 	}
+	public void driveForward(){
+		drive.arcadeDrive(0.5, 0);
+	}
+	public void turn(int direction) {
+		if(direction==1)
+			drive.arcadeDrive(0.5, 0.5);
+		else {
+			drive.arcadeDrive(0.5, -0.5);
+		}
+	}
+	
 	public void stop() {
 		drive.arcadeDrive(0, 0);
 	}

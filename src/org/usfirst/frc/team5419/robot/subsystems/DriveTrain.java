@@ -34,9 +34,9 @@ public class DriveTrain extends Subsystem {
 	}
 	public void turn(int direction) {
 		if(direction==1)
-			drive.arcadeDrive(0.5, 0.5);
+			drive.arcadeDrive(0, 0.5);
 		else {
-			drive.arcadeDrive(0.5, -0.5);
+			drive.arcadeDrive(0, -0.5);
 		}
 	}
 	

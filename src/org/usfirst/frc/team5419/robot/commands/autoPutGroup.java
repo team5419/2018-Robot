@@ -12,28 +12,40 @@ public class autoPutGroup extends CommandGroup {
 	String gameData;
 
 	public autoPutGroup() {
-		addSequential(new autoDriveCommand(36));
-		addSequential(new autoTurnCommand(90, 1));
-		
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		if(gameData.charAt(0) == 'L')
+		{
+			addSequential(new autoDriveCommand(24));
+			addSequential(new autoTurnCommand(45, -1));
+			addSequential(new autoDriveCommand(70));
+			addSequential(new autoTurnCommand(45, 1));
+			addSequential(new autoDriveCommand(25));
+			addSequential(new outtakeAutoCommand());
+
+			System.err.println("left");
+		} else {
+			addSequential(new autoDriveCommand(24));
+			addSequential(new autoTurnCommand(45, 1));
+			addSequential(new autoDriveCommand(70));
+			addSequential(new autoTurnCommand(45, -1));
+			addSequential(new autoDriveCommand(25));
+			addSequential(new outtakeAutoCommand());
+			
+			
+			System.err.println("right");
+		}
 	}
 	
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		if(gameData.charAt(0) == 'L')
-		{
-			
-			System.err.println("left");
-		} else {
-			System.err.println("right");
-		}
+		
 		//Robot.driveTrain.drive();
 	}
 

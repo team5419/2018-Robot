@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
 		//and the command to figure out switch color position and drop a crate in it
 		//auto line is 10ft from wall
 		chooser.addDefault("Cross Base", new autoDriveCommand(120));
-		chooser.addObject("Put Block", new autoPutCommand());
+		chooser.addObject("Put Block", new autoPutGroup());
 		SmartDashboard.putData("Auto mode", chooser);
 		
 	}
@@ -69,6 +69,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
 	}
 
 	/**
@@ -98,6 +99,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
+
 	}
 
 	@Override
@@ -119,6 +122,7 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("EncoderLeft", OI.encoderLeft.getRaw());
 		SmartDashboard.putNumber("EncoderRight", OI.encoderRight.getRaw());
+		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
 
 	}
 

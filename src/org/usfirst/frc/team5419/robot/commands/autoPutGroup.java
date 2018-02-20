@@ -26,7 +26,7 @@ public class autoPutGroup extends CommandGroup {
 			addSequential(new autoTurnCommand(45, -1));
 			addSequential(new autoDriveCommand(autoMap.left_autoDrive_distance_2));
 			addSequential(new autoTurnCommand(45, 1));
-			addSequential(new autoDriveCommand(autoMap.left_autoDrive_distance_3));
+			addSequential(new autoDriveCommand(autoMap.left_autoDrive_distance_3, 3));
 			addSequential(new outtakeAutoCommand(autoMap.outtake_time));
 
 		} else {
@@ -36,7 +36,7 @@ public class autoPutGroup extends CommandGroup {
 			addSequential(new autoTurnCommand(45, 1));
 			addSequential(new autoDriveCommand(autoMap.right_autoDrive_distance_2));
 			addSequential(new autoTurnCommand(45, -1));
-			addSequential(new autoDriveCommand(autoMap.right_autoDrive_distance_3));
+			addSequential(new autoDriveCommand(autoMap.right_autoDrive_distance_3, 3));
 			addSequential(new outtakeAutoCommand(autoMap.outtake_time));
 			
 			

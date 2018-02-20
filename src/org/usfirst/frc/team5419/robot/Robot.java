@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 
 	Command autoCommand;
-	SendableChooser<Command> chooser;
+	SendableChooser<String> chooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -46,12 +46,14 @@ public class Robot extends TimedRobot {
 		driveTrain = new DriveTrain();
 		intakeArm = new intakeArm();
 		oi = new OI();
-		chooser = new SendableChooser<Command>();
+		chooser = new SendableChooser<String>();
 		//Here I want to add the drive straight to solely cross the baseline command
 		//and the command to figure out switch color position and drop a crate in it
 		//auto line is 10ft from wall
-		chooser.addDefault("Cross Base", new autoDriveCommand(120));
-		chooser.addObject("Put Block", new autoPutGroup());
+//		chooser.addDefault("Cross Base", new autoDriveCommand(120));
+//		chooser.addObject("Put Block", new autoPutGroup());
+		chooser.addDefault("Cross Base", "Base");
+		chooser.addObject("Put Block", "Put");
 		SmartDashboard.putData("Auto mode", chooser);
 		
 	}
@@ -85,7 +87,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autoCommand = chooser.getSelected();
+		if(chooser.getSelected().equals("Base")) {
+			autoCommand = new autoDriveCommand(120);
+		}
+		else {
+			autoCommand = new autoPutGroup();
+		}
+	//	autoCommand = chooser.getSelected();
 		System.err.println(autoCommand);
 		// schedule the autonomous command (example)
 		if (autoCommand != null) {

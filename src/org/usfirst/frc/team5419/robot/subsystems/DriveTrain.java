@@ -25,8 +25,6 @@ public class DriveTrain extends Subsystem {
 	
 	public void drive() {
 		drive.arcadeDrive(-OI.driverStick.getRawAxis(1)*3/4, OI.driverStick.getRawAxis(4)*3/4);
-//		System.err.println("Left Encoder: "+ OI.encoderLeft.getDistance());
-//		System.err.println("Right Encoder: "+ OI.encoderRight.getDistance());
 
 	}
 	public void driveForward(){
@@ -34,9 +32,9 @@ public class DriveTrain extends Subsystem {
 	}
 	public void turn(int direction) {
 		if(direction==1)
-			drive.arcadeDrive(0, 1);
+			drive.arcadeDrive(0, 0.6);
 		else {
-			drive.arcadeDrive(0, -1);
+			drive.arcadeDrive(0, -0.6);
 		}
 	}
 	

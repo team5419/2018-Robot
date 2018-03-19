@@ -26,6 +26,7 @@ public class autoDriveCommand extends Command {
 	public autoDriveCommand(int distance) {
 		requires(Robot.driveTrain);
 		this.distance = distance;
+
 	}
 	
 	public autoDriveCommand(int distance, int time_max) {
@@ -34,7 +35,6 @@ public class autoDriveCommand extends Command {
 		this.time_max = time_max;
 		timer = new Timer();
 		timer.reset();
-		timer.start();
 	}
 	
 	
@@ -43,6 +43,8 @@ public class autoDriveCommand extends Command {
 	@Override
 	protected void initialize() {
 		OI.encoderLeft.reset();
+		if(timer!=null)
+			timer.start();
 		OI.encoderRight.reset();
 		
 	}
@@ -56,8 +58,8 @@ public class autoDriveCommand extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		System.out.println(OI.encoderLeft.get() + " "+ OI.encoderRight.getRaw());
-		double encoderavg = (Math.abs(OI.encoderLeft.getRaw()) + Math.abs(OI.encoderRight.getRaw()))/2.0;
+		System.out.println(OI.encoderLeft.get());
+		double encoderavg = (Math.abs(OI.encoderLeft.getRaw()));
 		double distanceavg = encoderavg * RobotMap.CIRCUMFERENCE / 720;
 		System.out.println(distanceavg + " " + distance);
 		if(distanceavg > distance) {

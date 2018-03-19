@@ -21,8 +21,8 @@ public class Intake extends Subsystem {
 
 	public void run(int direction) {
 		if (direction == 0) {
-			intake.set(0.5);
-			intakeReversed.set(-0.5);
+			intake.set(0.6);
+			intakeReversed.set(-0.6);
 		} else {
 			intake.set(-0.5);
 			intakeReversed.set(0.5);

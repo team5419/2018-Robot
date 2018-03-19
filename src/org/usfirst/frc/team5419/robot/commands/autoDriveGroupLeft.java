@@ -2,47 +2,37 @@ package org.usfirst.frc.team5419.robot.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team5419.robot.OI;
 import org.usfirst.frc.team5419.robot.Robot;
 
 /**
  * An example command.  You can replace me with your own command.
  */
-public class autoPutGroup extends CommandGroup {
+public class autoDriveGroupLeft extends CommandGroup {
 	public autoMap autoMap;
 	String gameData;
 
-	public autoPutGroup() {
-		
-		//Starting with left of robot on center line
-		//Adjust for 17 inches to right
+	public autoDriveGroupLeft() {
+
 		autoMap = new autoMap();
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		if(gameData.charAt(0) == 'L')
 		{
-			System.err.println("left");
+			SmartDashboard.putBoolean("Left", true);
 
-			addSequential(new autoDriveCommand(autoMap.left_autoDrive_distance_1));
-			addSequential(new autoTurnCommand(45, -1));
-			addSequential(new autoDriveCommand(autoMap.left_autoDrive_distance_2));
-			addSequential(new autoTurnCommand(45, 1));
-			//addSequential(new autoDriveCommand(autoMap.left_autoDrive_distance_3));
-			addSequential(new autoDriveCommand(autoMap.left_autoDrive_distance_3, 2));
+			addSequential(new autoDriveCommand(autoMap.midSwitchDistance));
+			addSequential(new autoTurnCommand(90, 1));
+			addSequential(new autoDriveCommand(24, 2));
 
 			addSequential(new outtakeAutoCommand(autoMap.outtake_time));
 
 		} else {
 			
-			System.err.println("right");
-			addSequential(new autoDriveCommand(autoMap.right_autoDrive_distance_1));
-			addSequential(new autoTurnCommand(45, 1));
-			addSequential(new autoDriveCommand(autoMap.right_autoDrive_distance_2));
-			addSequential(new autoTurnCommand(45, -1));
-			//addSequential(new autoDriveCommand(autoMap.right_autoDrive_distance_3));
-			addSequential(new autoDriveCommand(autoMap.right_autoDrive_distance_3, 2));
-
-			addSequential(new outtakeAutoCommand(autoMap.outtake_time));
+			SmartDashboard.putBoolean("Left", false);
 			
+			addSequential(new autoDriveCommand(autoMap.midSwitchDistance));
 			
 		}
 	}
@@ -56,6 +46,8 @@ public class autoPutGroup extends CommandGroup {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		
+		//Robot.driveTrain.drive();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

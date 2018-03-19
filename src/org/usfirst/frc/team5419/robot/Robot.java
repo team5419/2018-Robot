@@ -47,15 +47,14 @@ public class Robot extends TimedRobot {
 		intakeArm = new intakeArm();
 		oi = new OI();
 		chooser = new SendableChooser<String>();
-		//Here I want to add the drive straight to solely cross the baseline command
-		//and the command to figure out switch color position and drop a crate in it
-		//auto line is 10ft from wall
-//		chooser.addDefault("Cross Base", new autoDriveCommand(120));
-//		chooser.addObject("Put Block", new autoPutGroup());
-		chooser.addDefault("Cross Base", "Base");
-		chooser.addObject("Put Block", "Put");
+
+		chooser.addDefault("Put Block", "Put");
+		chooser.addObject("Cross Base", "Base");
+		chooser.addObject("Cross Base Left", "Left");
+		chooser.addObject("Cross Base Right", "Right");
+
 		SmartDashboard.putData("Auto mode", chooser);
-		
+
 	}
 
 	/**
@@ -87,15 +86,35 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		if(chooser.getSelected().equals("Base")) {
-			autoCommand = new autoDriveCommand(120);
-		}
-		else {
+//		if(chooser.getSelected().equals("Put")) {
+//			autoCommand = new autoPutGroup();
+//		}
+//		else {
+//			autoCommand = new autoDriveCommand(120, 5);
+//		}
+		
+		if(chooser.getSelected().equals("Put")) {
 			autoCommand = new autoPutGroup();
+			SmartDashboard.putString("Auto", "Put");
+			
 		}
-	//	autoCommand = chooser.getSelected();
+		else if(chooser.getSelected().equals("Left")){
+			autoCommand = new autoDriveGroupLeft();
+			SmartDashboard.putString("Auto", "Left");
+
+		}
+		else if(chooser.getSelected().equals("Right")){
+			autoCommand = new autoDriveGroupRight();
+			SmartDashboard.putString("Auto", "Right");
+
+		}
+		else{
+			autoCommand = new autoDriveCommand(120, 5);
+			SmartDashboard.putString("Auto", "Base");
+
+		}
+		
 		System.err.println(autoCommand);
-		// schedule the autonomous command (example)
 		if (autoCommand != null) {
 			autoCommand.start();
 		}
@@ -108,6 +127,8 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
+		SmartDashboard.putNumber("EncoderLeft", OI.encoderLeft.getRaw());
+
 
 	}
 

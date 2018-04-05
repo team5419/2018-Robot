@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import edu.wpi.first.wpilibj.CameraServer;
+
 import org.usfirst.frc.team5419.robot.commands.*;
 import org.usfirst.frc.team5419.robot.subsystems.*;
 
@@ -40,6 +42,14 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		
+		//webcam stuff
+		CameraServer.getInstance().startAutomaticCapture();
+		
+		//trying out ramping 
+		
+		
+		
 		OI.gyro.calibrate();
 		OI.gyro.reset();
 		intake = new Intake();

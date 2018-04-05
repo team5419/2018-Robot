@@ -23,8 +23,8 @@ import com.ctre.CANTalon;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public static final Joystick driverStick = new Joystick(0);
-	public static final Joystick operatorStick = new Joystick(1);
+	public static final Joystick driverStick = new Joystick(1);
+	public static final Joystick operatorStick = new Joystick(0);
 	Button intakeButton = new JoystickButton(operatorStick, 2);
 	Button outtakeButton = new JoystickButton(operatorStick, 3);
 	public static final Encoder encoderLeft = new Encoder(2,3,false,Encoder.EncodingType.k2X);

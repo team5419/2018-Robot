@@ -14,14 +14,29 @@ package org.usfirst.frc.team5419.robot;
  * floating around.
  */
 public class RobotMap {
-	 public static int leftBackMotor = 5;
-	 public static int rightBackMotor = 4;
-	 public static int leftFrontMotor = 0;
-	 public static int rightFrontMotor = 10;
+	/*
+	 public static int leftBackMotor = 9;   // 9
+	 public static int rightBackMotor = 2;  // 2
+	 public static int leftFrontMotor = 0;  // 0
+	 public static int rightFrontMotor = 10; // ?
 	 //When looking at robot from front
-	 public static int intakeLeft = 1;
-	 public static int intakeRight = 3;
-	 public static int intakeArm = 6;
+	 public static int intakeLeft = 1;    //3
+	 public static int intakeRight = 3; //?
+	 public static int intakeArm = 6;  //6
+	 public static int climberWinch = 4; // not sure if this is right
+	 public static int climberHook = 5;
+	 public static final double CIRCUMFERENCE = 5.0*Math.PI;*/
+	 
+	 public static int leftBackMotor = 9;   // 9
+	 public static int rightBackMotor = 2;  // 2
+	 public static int leftFrontMotor = 0;  // 0
+	 public static int rightFrontMotor = 5; // ?
+	 //When looking at robot from front
+	 public static int intakeLeft = 3;    //3
+	 public static int intakeRight = 8; //?
+	 public static int intakeArm = 6;  //6
+	 public static int climberWinch = 7; // not sure if this is right
+	 public static int climberHook = 10;
 	 public static final double CIRCUMFERENCE = 5.0*Math.PI;
 
 }

@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team5419.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team5419.robot.OI;
@@ -15,34 +16,35 @@ import org.usfirst.frc.team5419.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class autoTurnCommand extends Command {
-	int degrees;
-	int direction;
-	//1 for right, -1 for left
-	public autoTurnCommand(int degrees, int direction) {
-		requires(Robot.driveTrain);
-		this.direction = direction;
-		this.degrees = degrees;
+public class outtakeAutoCommand extends Command {
+	
+	public Timer timer = new Timer();
+	public int time;
+	
+	public outtakeAutoCommand(int time) {
+		this.time = time;
+		requires(Robot.intake);
+		
+	
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		OI.gyro.reset();
-		System.out.println("Reached Auto Turn Initialize");
+		timer.reset();
+		timer.start();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.driveTrain.turn(direction);
+		Robot.intake.outtakeAuto();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		int turned = (int) (Math.abs( OI.gyro.getAngle()));
-		if(turned > degrees) {
+		if(timer.get() > time) {
 			return true;
 		}
 		return false;
@@ -51,7 +53,7 @@ public class autoTurnCommand extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.driveTrain.stop();
+		Robot.intake.stop();
 	}
 
 	// Called when another command which requires one or more of the same

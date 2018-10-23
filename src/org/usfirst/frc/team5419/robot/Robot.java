@@ -10,12 +10,12 @@ package org.usfirst.frc.team5419.robot;
 import edu.wpi.first.wpilibj.DriverStation; 
 import edu.wpi.first.wpilibj.TimedRobot;
 
+import edu.wpi.first.wpilibj.CameraServer;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import edu.wpi.first.wpilibj.CameraServer;
 
 import org.usfirst.frc.team5419.robot.commands.*;
 import org.usfirst.frc.team5419.robot.subsystems.*;
@@ -31,10 +31,12 @@ public class Robot extends TimedRobot {
 	public static Intake intake;
 	public static DriveTrain driveTrain;
 	public static intakeArm intakeArm;
+	public static climberWinch climberWinch;
+	public static climberHook climberHook;
 	public static OI oi;
 
 	Command autoCommand;
-	SendableChooser<Command> chooser;
+	SendableChooser<String> chooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -43,11 +45,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		
-		//webcam stuff
+		//camera!
 		CameraServer.getInstance().startAutomaticCapture();
-		
-		//trying out ramping 
-		
 		
 		
 		OI.gyro.calibrate();
@@ -55,15 +54,18 @@ public class Robot extends TimedRobot {
 		intake = new Intake();
 		driveTrain = new DriveTrain();
 		intakeArm = new intakeArm();
+		climberHook = new climberHook();
+		climberWinch = new climberWinch();
 		oi = new OI();
-		chooser = new SendableChooser<Command>();
-		//Here I want to add the drive straight to solely cross the baseline command
-		//and the command to figure out switch color position and drop a crate in it
-		//auto line is 10ft from wall
-		chooser.addDefault("Cross Base", new autoDriveCommand(120));
-		chooser.addObject("Put Block", new autoPutCommand());
+		chooser = new SendableChooser<String>();
+
+		chooser.addDefault("Put Block", "Put");
+		chooser.addObject("Cross Base", "Base");
+		chooser.addObject("Cross Base Left", "Left");
+		chooser.addObject("Cross Base Right", "Right");
+
 		SmartDashboard.putData("Auto mode", chooser);
-		
+
 	}
 
 	/**
@@ -79,6 +81,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
+		SmartDashboard.putNumber("Left Encoder", OI.encoderLeft);
+
 	}
 
 	/**
@@ -94,9 +99,35 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autoCommand = chooser.getSelected();
+//		if(chooser.getSelected().equals("Put")) {
+//			autoCommand = new autoPutGroup();
+//		}
+//		else {
+//			autoCommand = new autoDriveCommand(120, 5);
+//		}
+		
+		if(chooser.getSelected().equals("Put")) {
+			autoCommand = new autoPutGroup();
+			SmartDashboard.putString("Auto", "Put");
+			
+		}
+		else if(chooser.getSelected().equals("Left")){
+			autoCommand = new autoDriveGroupLeft();
+			SmartDashboard.putString("Auto", "Left");
+
+		}
+		else if(chooser.getSelected().equals("Right")){
+			autoCommand = new autoDriveGroupRight();
+			SmartDashboard.putString("Auto", "Right");
+
+		}
+		else{
+			autoCommand = new autoDriveCommand(120, 5);
+			SmartDashboard.putString("Auto", "Base");
+
+		}
+		
 		System.err.println(autoCommand);
-		// schedule the autonomous command (example)
 		if (autoCommand != null) {
 			autoCommand.start();
 		}
@@ -108,6 +139,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
+		SmartDashboard.putNumber("EncoderLeft", OI.encoderLeft.getRaw());
+
+
 	}
 
 	@Override
@@ -128,7 +163,8 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("EncoderLeft", OI.encoderLeft.getRaw());
-		SmartDashboard.putNumber("EncoderRight", OI.encoderRight.getRaw());
+		//SmartDashboard.putNumber("EncoderRight", OI.encoderRight.getRaw());
+		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
 
 	}
 

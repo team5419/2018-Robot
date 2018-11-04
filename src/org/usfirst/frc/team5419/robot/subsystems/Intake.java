@@ -30,8 +30,8 @@ public class Intake extends Subsystem {
 	}
 	
 	public void outtakeAuto() {
-		intake.set(-0.5);
-		intakeReversed.set(0.5);
+		intake.set(0.5);
+		intakeReversed.set(-0.5);
 	}
 
 	public void stop() {

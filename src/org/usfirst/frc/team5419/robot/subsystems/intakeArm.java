@@ -19,7 +19,7 @@ public class intakeArm extends Subsystem {
 	
 
 	public void run() {
-		intakeArm.set(OI.operatorStick.getRawAxis(1) * 0.4);
+		intakeArm.set(OI.operatorStick.getRawAxis(1) * 0.5);
 	}
 
 	public void stop() {

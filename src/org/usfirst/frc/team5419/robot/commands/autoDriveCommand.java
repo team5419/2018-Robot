@@ -58,7 +58,7 @@ public class autoDriveCommand extends Command {
 	protected boolean isFinished() {
 		System.out.println(OI.encoderLeft.get());
 		double encoderavg = (Math.abs(OI.encoderLeft.getRaw()));
-		double distanceavg = encoderavg * RobotMap.CIRCUMFERENCE / 720;
+		double distanceavg = encoderavg * RobotMap.CIRCUMFERENCE / 2900;
 		System.out.println(distanceavg + " " + distance);
 		if(distanceavg > distance) {
 			return true;

@@ -37,6 +37,7 @@ public class RobotMap {
 	 public static int intakeArm = 6;  //6
 	 public static int climberWinch = 7; // not sure if this is right
 	 public static int climberHook = 10;
+	 public static int countsPerRev = 2090;
 	 public static final double CIRCUMFERENCE = 5.0*Math.PI;
 
 }

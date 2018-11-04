@@ -24,7 +24,8 @@ public class DriveTrain extends Subsystem {
 	DifferentialDrive drive = new DifferentialDrive(left, right);
 	
 	public void drive() {
-		drive.arcadeDrive(-OI.driverStick.getRawAxis(1)*3/4, OI.driverStick.getRawAxis(4)*3/4);
+		
+		drive.arcadeDrive(-OI.driverStick.getRawAxis(1), OI.driverStick.getRawAxis(4));
 
 	}
 	public void driveForward(){

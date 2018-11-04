@@ -29,7 +29,7 @@ import org.usfirst.frc.team5419.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
 	public static Intake intake;
-	public static DriveTrain driveTrain;
+	public static ClosedDriveTrain driveTrain;
 	public static intakeArm intakeArm;
 	public static climberWinch climberWinch;
 	public static climberHook climberHook;
@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
 		OI.gyro.calibrate();
 		OI.gyro.reset();
 		intake = new Intake();
-		driveTrain = new DriveTrain();
+		driveTrain = new ClosedDriveTrain();
 		intakeArm = new intakeArm();
 		climberHook = new climberHook();
 		climberWinch = new climberWinch();
@@ -82,7 +82,7 @@ public class Robot extends TimedRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
-		SmartDashboard.putNumber("Left Encoder", OI.encoderLeft);
+		SmartDashboard.putNumber("Left Encoder", OI.encoderLeft.get());
 
 	}
 
@@ -140,7 +140,7 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
-		SmartDashboard.putNumber("EncoderLeft", OI.encoderLeft.getRaw());
+		  SmartDashboard.putNumber("EncoderLeft", OI.encoderLeft.getRaw());
 
 
 	}

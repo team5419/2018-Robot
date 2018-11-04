@@ -29,7 +29,7 @@ public class autoDriveGroupLeft extends CommandGroup {
 			addSequential(new outtakeAutoCommand(autoMap.outtake_time));
 
 		} else {
-			
+
 			SmartDashboard.putBoolean("Left", false);
 			
 			addSequential(new autoDriveCommand(autoMap.midSwitchDistance));

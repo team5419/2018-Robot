@@ -65,7 +65,6 @@ public class Robot extends TimedRobot {
 		chooser.addObject("Cross Base Right", "Right");
 
 		SmartDashboard.putData("Auto mode", chooser);
-
 	}
 
 	/**
@@ -83,7 +82,6 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
 		SmartDashboard.putNumber("Left Encoder", OI.encoderLeft.get());
-
 	}
 
 	/**
@@ -97,6 +95,7 @@ public class Robot extends TimedRobot {
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
+	
 	@Override
 	public void autonomousInit() {
 //		if(chooser.getSelected().equals("Put")) {
@@ -140,9 +139,7 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
-		  SmartDashboard.putNumber("EncoderLeft", OI.encoderLeft.getRaw());
-
-
+		SmartDashboard.putNumber("EncoderLeft", OI.encoderLeft.getRaw());
 	}
 
 	@Override

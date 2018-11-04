@@ -26,7 +26,7 @@ public class RobotMap {
 	 public static int climberWinch = 4; // not sure if this is right
 	 public static int climberHook = 5;
 	 public static final double CIRCUMFERENCE = 5.0*Math.PI;*/
-	 
+	
 	 public static int leftBackMotor = 9;   // 9
 	 public static int rightBackMotor = 2;  // 2
 	 public static int leftFrontMotor = 0;  // 0
@@ -39,5 +39,8 @@ public class RobotMap {
 	 public static int climberHook = 10;
 	 public static int countsPerRev = 2090;
 	 public static final double CIRCUMFERENCE = 5.0*Math.PI;
-
+	 
+	 public static int SlotIdx = 0;
+	 public static int PIDLoopIdx = 0;
+	 public static int TimeoutMs = 10;
 }

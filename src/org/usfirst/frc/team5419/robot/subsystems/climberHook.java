@@ -17,9 +17,8 @@ public class climberHook extends Subsystem {
 	WPI_TalonSRX climberHook = new WPI_TalonSRX(RobotMap.climberHook);
 	
 	
-	public void run()
-	{
-			climberHook.set(OI.operatorStick.getRawAxis(5)*1/4);
+	public void run() {
+		climberHook.set(OI.operatorStick.getRawAxis(5)*1/4);
 	}
 	
 	

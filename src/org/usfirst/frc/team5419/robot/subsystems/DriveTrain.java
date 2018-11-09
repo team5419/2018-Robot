@@ -6,14 +6,11 @@ import org.usfirst.frc.team5419.robot.RobotMap;
 import org.usfirst.frc.team5419.robot.commands.DriveCommand;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveTrain extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
 	WPI_TalonSRX leftBackMotor = new WPI_TalonSRX(RobotMap.leftBackMotor);	
 	WPI_TalonSRX rightBackMotor = new WPI_TalonSRX(RobotMap.rightBackMotor);
 	WPI_TalonSRX leftFrontMotor = new WPI_TalonSRX(RobotMap.leftFrontMotor);

@@ -35,6 +35,8 @@ public class Robot extends TimedRobot {
 	public static climberHook climberHook;
 	public static OI oi;
 
+	public static SendableChooser<String> loopMode;
+	
 	Command autoCommand;
 	SendableChooser<String> chooser;
 
@@ -44,10 +46,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		
-		//camera!
 		CameraServer.getInstance().startAutomaticCapture();
-		
 		
 		OI.gyro.calibrate();
 		OI.gyro.reset();
@@ -57,14 +56,18 @@ public class Robot extends TimedRobot {
 		climberHook = new climberHook();
 		climberWinch = new climberWinch();
 		oi = new OI();
+		
 		chooser = new SendableChooser<String>();
-
 		chooser.addDefault("Put Block", "Put");
 		chooser.addObject("Cross Base", "Base");
 		chooser.addObject("Cross Base Left", "Left");
 		chooser.addObject("Cross Base Right", "Right");
-
 		SmartDashboard.putData("Auto mode", chooser);
+		
+		loopMode = new SendableChooser<String>();
+		loopMode.addDefault("open", "open");
+		loopMode.addObject("closed", "closed");
+		SmartDashboard.putData("Loop mode", loopMode);
 	}
 
 	/**
@@ -81,7 +84,10 @@ public class Robot extends TimedRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
-		SmartDashboard.putNumber("Left Encoder", OI.encoderLeft.get());
+		SmartDashboard.putNumber("EncoderLeft", OI.encoderLeft.get());
+		
+		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Loop mode", loopMode);
 	}
 
 	/**
@@ -98,6 +104,8 @@ public class Robot extends TimedRobot {
 	
 	@Override
 	public void autonomousInit() {
+		autoCommand = new autoDriveCommand(120, 5);
+		
 //		if(chooser.getSelected().equals("Put")) {
 //			autoCommand = new autoPutGroup();
 //		}
@@ -105,7 +113,7 @@ public class Robot extends TimedRobot {
 //			autoCommand = new autoDriveCommand(120, 5);
 //		}
 		
-		if(chooser.getSelected().equals("Put")) {
+		/*if(chooser.getSelected().equals("Put")) {
 			autoCommand = new autoPutGroup();
 			SmartDashboard.putString("Auto", "Put");
 			
@@ -124,7 +132,7 @@ public class Robot extends TimedRobot {
 			autoCommand = new autoDriveCommand(120, 5);
 			SmartDashboard.putString("Auto", "Base");
 
-		}
+		}*/
 		
 		System.err.println(autoCommand);
 		if (autoCommand != null) {
@@ -162,6 +170,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("EncoderLeft", OI.encoderLeft.getRaw());
 		//SmartDashboard.putNumber("EncoderRight", OI.encoderRight.getRaw());
 		SmartDashboard.putNumber("Gyro", OI.gyro.getAngle());
+		
+		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Loop mode", loopMode);
 
 	}
 

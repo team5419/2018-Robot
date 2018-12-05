@@ -32,31 +32,31 @@ public class autoDriveCommand extends Command {
 	public autoDriveCommand(int distance, int time_max) {
 		requires(Robot.driveTrain);
 		this.distance = distance;
-		this.time_max = time_max;
+		/*this.time_max = time_max;
 		timer = new Timer();
-		timer.reset();
+		timer.reset();*/
+		
+		
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 		OI.encoderLeft.reset();
-		if(timer!=null)
-			timer.start();
-	//	OI.encoderRight.reset();
+		//OI.encoderRight.reset();
 		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.driveTrain.driveForward();
+		Robot.driveTrain.drive(this.distance);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		System.out.println(OI.encoderLeft.get());
+		/*System.out.println(OI.encoderLeft.get());
 		double encoderavg = (Math.abs(OI.encoderLeft.getRaw()));
 		double distanceavg = encoderavg * RobotMap.CIRCUMFERENCE / 2900;
 		System.out.println(distanceavg + " " + distance);
@@ -66,6 +66,7 @@ public class autoDriveCommand extends Command {
 			timer.stop();
 			return true;
 		}
+		return false;*/
 		return false;
 	}
 

@@ -34,8 +34,7 @@ public class OI {
 	//public static final Encoder encoderRight = new Encoder(4,5,false,Encoder.EncodingType.k2X);
 	//public static final WPI_TalonSRX encoderLeft  = new WPI_TalonSRX(RobotMap.leftBackMotor);	
 	public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
-	
-	
+		
 	public OI() {
 		intakeButton.whileHeld(new intakeCommand(0));
 		outtakeButton.whileHeld(new intakeCommand(1));

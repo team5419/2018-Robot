@@ -21,17 +21,17 @@ public class DriveTrain extends Subsystem {
 	DifferentialDrive drive = new DifferentialDrive(left, right);
 	
 	public void drive() {
-		
 		drive.arcadeDrive(-OI.driverStick.getRawAxis(1), OI.driverStick.getRawAxis(4));
-
 	}
+	
 	public void driveForward(){
 		drive.arcadeDrive(0.5, 0);
 	}
+	
 	public void turn(int direction) {
-		if(direction==1)
+		if(direction==1) {
 			drive.arcadeDrive(0, 0.6);
-		else {
+		} else {
 			drive.arcadeDrive(0, -0.6);
 		}
 	}

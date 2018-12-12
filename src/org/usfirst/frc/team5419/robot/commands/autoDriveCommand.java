@@ -19,7 +19,7 @@ import org.usfirst.frc.team5419.robot.RobotMap;
  * An example command.  You can replace me with your own command.
  */
 public class autoDriveCommand extends Command {
-	int distance;
+	double distance;
 	int time_max;
 	Timer timer;
 	
@@ -29,7 +29,7 @@ public class autoDriveCommand extends Command {
 
 	}
 	
-	public autoDriveCommand(int distance, int time_max) {
+	public autoDriveCommand(double distance, int time_max) {
 		requires(Robot.driveTrain);
 		this.distance = distance;
 		/*this.time_max = time_max;
@@ -42,15 +42,15 @@ public class autoDriveCommand extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		OI.encoderLeft.reset();
-		//OI.encoderRight.reset();
-		
+		//Robot.driveTrain.leftBackMotor.reset();
+		//Robot.driveTrain.rightBackMotor.reset();
+		Robot.driveTrain.drive(this.distance);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.driveTrain.drive(this.distance);
+		//Robot.driveTrain.drive(this.distance);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -65,8 +65,7 @@ public class autoDriveCommand extends Command {
 		}else if(timer != null && timer.get() > time_max) {
 			timer.stop();
 			return true;
-		}
-		return false;*/
+		}*/
 		return false;
 	}
 

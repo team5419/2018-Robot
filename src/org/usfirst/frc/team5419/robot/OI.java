@@ -30,7 +30,7 @@ public class OI {
 	Button outtakeButton = new JoystickButton(operatorStick, 3);
 	Button winchButtonWind = new JoystickButton(operatorStick, 6);
 	Button winchButtonUnwind = new JoystickButton(operatorStick, 5);
-	public static final Encoder encoderLeft = new Encoder(2,3,false,Encoder.EncodingType.k2X);
+	//public static final Encoder encoderLeft = new Encoder(2,3,false,Encoder.EncodingType.k2X);
 	//public static final Encoder encoderRight = new Encoder(4,5,false,Encoder.EncodingType.k2X);
 	//public static final WPI_TalonSRX encoderLeft  = new WPI_TalonSRX(RobotMap.leftBackMotor);	
 	public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);

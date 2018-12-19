@@ -23,20 +23,14 @@ public class autoDriveCommand extends Command {
 	int time_max;
 	Timer timer;
 	
-	public autoDriveCommand(int distance) {
+	public autoDriveCommand(double distance) {
 		requires(Robot.driveTrain);
 		this.distance = distance;
 
 	}
 	
-	public autoDriveCommand(double distance, int time_max) {
-		requires(Robot.driveTrain);
-		this.distance = distance;
-		/*this.time_max = time_max;
-		timer = new Timer();
-		timer.reset();*/
-		
-		
+	public autoDriveCommand(double distance, int time) {
+		// todo: remove
 	}
 
 	// Called just before this Command runs the first time
@@ -47,26 +41,15 @@ public class autoDriveCommand extends Command {
 		Robot.driveTrain.drive(this.distance);
 	}
 
-	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		//Robot.driveTrain.drive(this.distance);
+		Robot.driveTrain.update();
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		/*System.out.println(OI.encoderLeft.get());
-		double encoderavg = (Math.abs(OI.encoderLeft.getRaw()));
-		double distanceavg = encoderavg * RobotMap.CIRCUMFERENCE / 2900;
-		System.out.println(distanceavg + " " + distance);
-		if(distanceavg > distance) {
-			return true;
-		}else if(timer != null && timer.get() > time_max) {
-			timer.stop();
-			return true;
-		}*/
-		return false;
+		return Robot.driveTrain.isFinished();
 	}
 
 	// Called once after isFinished returns true

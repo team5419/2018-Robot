@@ -8,16 +8,11 @@
 package org.usfirst.frc.team5419.robot;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team5419.robot.commands.*;
-
-import com.ctre.CANTalon;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -25,7 +20,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  */
 public class OI {
 	public static final Joystick driverStick = new Joystick(0);
-	public static final Joystick operatorStick = new Joystick(1);
+	public static final Joystick operatorStick = new Joystick(0);
 	Button intakeButton = new JoystickButton(operatorStick, 2);
 	Button outtakeButton = new JoystickButton(operatorStick, 3);
 	Button winchButtonWind = new JoystickButton(operatorStick, 6);

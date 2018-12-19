@@ -5,6 +5,7 @@ import org.usfirst.frc.team5419.robot.RobotMap;
 
 import org.usfirst.frc.team5419.robot.commands.DriveCommand;
 
+import com.ctre.phoenix.motion.TrajectoryPoint;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -54,6 +55,8 @@ public class ClosedDriveTrain extends Subsystem {
 		//talon.configSelectedFeedbackSensor(0,0,0);
 		talon.configMotionAcceleration(RobotMap.Acceleration, RobotMap.TimeoutMs);
 		talon.configMotionCruiseVelocity(RobotMap.maxSpeed, RobotMap.TimeoutMs);
+		
+		talon.configMotionProfileTrajectoryPeriod(100000,100000);
 	}
 	
 	public void drive(String mode) {
@@ -78,13 +81,37 @@ public class ClosedDriveTrain extends Subsystem {
 		SmartDashboard.putNumber("JoyValue", forward);
 	}
 	
+	public boolean isFinished() {
+		return false;//leftBackMotor.getMotionProfileTopLevelBufferCount() == 0;
+	}
+	
+	public void update() {
+		leftBackMotor.processMotionProfileBuffer();
+	}
+	
+	
 	public void drive(double dist) {
-		this.rightBackMotor.getSensorCollection().setQuadraturePosition(0, RobotMap.TimeoutMs);
-		this.leftBackMotor.getSensorCollection().setQuadraturePosition(0, RobotMap.TimeoutMs);
-		int right = this.rightBackMotor.getSensorCollection().getQuadraturePosition();
-		int left = this.leftBackMotor.getSensorCollection().getQuadraturePosition();
-		leftBackMotor.set(ControlMode.MotionMagic, right + dist);
-		rightBackMotor.set(ControlMode.MotionMagic, left + dist);
+		//this.rightBackMotor.getSensorCollection().setQuadraturePosition(0, RobotMap.TimeoutMs);
+		//this.leftBackMotor.getSensorCollection().setQuadraturePosition(0, RobotMap.TimeoutMs);
+		//int right = this.rightBackMotor.getSensorCollection().getQuadraturePosition();
+		//int left = this.leftBackMotor.getSensorCollection().getQuadraturePosition();
+		//leftBackMotor.set(ControlMode.MotionMagicArc, right + dist);
+		//rightBackMotor.set(ControlMode.MotionMagicArc, left + dist);
+		
+		
+		//1.0 keeps streaming points, once at set position goes to next point
+		//2.0 stops it at whatever point is at right now
+		//Use 2.0 on last point of auto
+		//Also there is a flag that isLast
+		leftBackMotor.set(ControlMode.MotionProfile, 1.0);
+		
+		TrajectoryPoint point = new TrajectoryPoint();
+		point.position = dist;
+		point.velocity = RobotMap.maxSpeed;
+		point.zeroPos = true;
+		point.isLastPoint = true;
+		point.profileSlotSelect0 = RobotMap.PIDLoopIdx;
+		leftBackMotor.pushMotionProfileTrajectory(point);
 	}
 	
 	public void turn(int direction) {
@@ -113,8 +140,7 @@ public class ClosedDriveTrain extends Subsystem {
 		double targetVelocityRight = (speed - turn)* RobotMap.maxSpeed;
 		double targetVelocityLeft = (speed + turn) * RobotMap.maxSpeed;
 		
-		//rightBackMotor.set(ControlMode.Velocity, targetVelocityRight); 
-		//leftBackMotor.set(ControlMode.Velocity, targetVelocityLeft);
-		
+		rightBackMotor.set(ControlMode.Velocity, targetVelocityRight); 
+		leftBackMotor.set(ControlMode.Velocity, targetVelocityLeft);
 	}
 }

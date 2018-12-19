@@ -91,14 +91,6 @@ public class ClosedDriveTrain extends Subsystem {
 	
 	
 	public void drive(double dist) {
-		//this.rightBackMotor.getSensorCollection().setQuadraturePosition(0, RobotMap.TimeoutMs);
-		//this.leftBackMotor.getSensorCollection().setQuadraturePosition(0, RobotMap.TimeoutMs);
-		//int right = this.rightBackMotor.getSensorCollection().getQuadraturePosition();
-		//int left = this.leftBackMotor.getSensorCollection().getQuadraturePosition();
-		//leftBackMotor.set(ControlMode.MotionMagicArc, right + dist);
-		//rightBackMotor.set(ControlMode.MotionMagicArc, left + dist);
-		
-		
 		//1.0 keeps streaming points, once at set position goes to next point
 		//2.0 stops it at whatever point is at right now
 		//Use 2.0 on last point of auto
